@@ -27,6 +27,16 @@
             return a.MyZip(b,c, (d1, d2, d3) => d1 * d2 * d3).Sum();
         }
 
+        public static double DotProduct (this IEnumerable<double> a, IEnumerable<double> b)
+        {
+          return a.Zip(b, (d1, d2) => d1 * d2).Sum();
+        }
+
+        public static double DotProduct (this IEnumerable<double> a, IEnumerable<double> b, IEnumerable<double> c)
+        {
+          return a.MyZip(b, c, (d1, d2, d3) => d1 * d2 * d3).Sum();
+        }
+
         /// <summary>
         /// is empty enumerable
         /// </summary>

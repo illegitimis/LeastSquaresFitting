@@ -96,9 +96,9 @@ namespace LeastSquares.Tests
         public void IdentityDuplicatesAr()
         {
             var llsi = new Linear(
-                new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+                new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
                 ,
-                new float[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+                new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
                 );
 
             Assert.AreEqual(llsi.Count, 18);

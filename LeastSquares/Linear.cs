@@ -20,29 +20,30 @@
         /// </summary>
         /// <param name="x">abscissae</param>
         /// <param name="y">ordinates</param>
-        public Linear(IEnumerable<float> x, IEnumerable<float> y) : base(x, y) { }
+        public Linear(IEnumerable<double> x, IEnumerable<double> y) : base(x, y) { }
+        public Linear (IEnumerable<double[]> ar2double) : base(ar2double) { }
 
         /// <summary>
         /// the computed slope, aka regression coefficient
         /// </summary>
-        public float Slope { get { return ssxy / ssxx; } }
+        public double Slope { get { return ssxy / ssxx; } }
 
         // dotvector(x,y)-n*avgx*avgy
-        float ssxy { get { return X.DotProduct(Y) - CountUnique * AverageX * AverageY; } }
+        double ssxy { get { return X.DotProduct(Y) - CountUnique * AverageX * AverageY; } }
         //sum squares x - n * square avgx
-        float ssxx { get { return X.DotProduct(X) - CountUnique * AverageX * AverageX; } }
+        double ssxx { get { return X.DotProduct(X) - CountUnique * AverageX * AverageX; } }
 
         /// <summary>
         /// computed  intercept
         /// </summary>
-        public float Intercept { get { return AverageY - Slope * AverageX; } }
+        public double Intercept { get { return AverageY - Slope * AverageX; } }
 
         public override string ToString()
         {
-            return string.Format("slope:{0:F02} intercept:{1:F02} R^2{2:F02}", Slope, Intercept, R2);
+            return string.Format("slope:{0:F02} intercept:{1:F02} R^2:{2:F02}", Slope, Intercept, R2);
         }
 
-        public override float SSResidual
+        public override double SSResidual
         {
             get 
             { 

@@ -20,33 +20,37 @@
         /// </summary>
         /// <param name="x">abscissae</param>
         /// <param name="y">ordinates</param>
-        public Exponential(IEnumerable<float> x, IEnumerable<float> y) : base(x, y) { }
+        public Exponential(IEnumerable<double> x, IEnumerable<double> y) : base(x, y) { }
+        public Exponential(IEnumerable<double[]> ar2double) : base (ar2double) {}
 
-        public float A { get { return (float)Math.Exp(a); } }
-        public float B { get { return (float)b; } }
+        public double A { get { return (double)Math.Exp(a); } }
+        public double B { get { return (double)b; } }
 
         // COMPUTED
-        float a_h { get { return sumlny * X.DotProduct(X) - SumX * sumxlny; } }
-        float a_l { get { return CountUnique * X.DotProduct(X) - SumX * SumX; } }
-        float a { get { return a_h / a_l; } }
+        double a_h { get { return sumlny * X.DotProduct(X) - SumX * sumxlny; } }
+        double a_l { get { return CountUnique * X.DotProduct(X) - SumX * SumX; } }
+        double a { get { return a_h / a_l; } }
 
-        float b { get { return b_h/b_l; } }
-        float b_h { get { return CountUnique * sumxlny - SumX * sumlny; } }
-        float b_l { get { return a_l; } }
+        double b { get { return b_h/b_l; } }
+        double b_h { get { return CountUnique * sumxlny - SumX * sumlny; } }
+        double b_l { get { return a_l; } }
 
-        float sumlny { get { return Y.Select(y=>(float)Math.Log(y)).Sum(); } }
-        float sumxlny { get { return X.DotProduct(Y.Select(y => (float)Math.Log(y))); } }
+        double sumlny { get { return Y.Select(y=>(double)Math.Log(y)).Sum(); } }
+        double sumxlny { get { return X.DotProduct(Y.Select(y => (double)Math.Log(y))); } }
 
-
-
-        public override float SSResidual
+        public override double SSResidual
         {
             get
             {
-                var F = X.Select(x => A * (float)Math.Exp(x*B));
+                var F = X.Select(x => A * (double)Math.Exp(x*B));
                 var residues = Y.Zip(F, (y, f) => y - f);
                 return residues.DotProduct(residues);
             }
+        }
+
+        public override string ToString ( )
+        {
+          return string.Format("(EX) A:{0} B:{1} R^2:{2:F02}", A, B, R2);
         }
     }
 }
